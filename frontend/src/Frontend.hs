@@ -32,31 +32,38 @@ frontend = Frontend
     elClass "section" "hero is-fullheight" $ do
       elClass "div" "hero-head" $ blank
       elClass "div" "hero-body" $ do
-        -- elAttr "div" (Map.fromList [("class", "container"), ("style", "margin-top: auto; margin-bottom: 0;")]) $ do
-        elAttr "div" (Map.fromList [("style", "display: flex; flex-flow: row wrap; align-self: stretch; align-items: bottom; flex-direction: column;")]) $ do
-          -- elAttr "div" (Map.fromList [("style", "display: flex: 1 1 auto; overflow-y: auto; min-height: 0px;")]) $ do
-            elClass "div" "" $ text "!!!"
-            elClass "div" "" $ text "World"
-            elClass "div" "" $ text "Hello"
-            elClass "div" "" $ text "Bulma CSS"
-            elClass "div" "" $ text "Reflex-DOM"
+        elAttr "div" (Map.fromList [("style", "display: flex; flex-grow: 1; flex-shrink: 1; align-self: stretch; position: relative")]) $ do
+          -- elAttr "div" (Map.fromList [("style", "position: absolute; width: 100%; height: 100%; display: flex; flex-direction: column; overflow-y: auto;")]) $ do
+          elAttr "div" (Map.fromList [("style", "position: absolute; width: 100%; height: 100%; display: flex; flex-direction: column; flex-wrap: wrap; align-items: flex-start; justify-content: flex-end;")]) $ do
+            elClass "span" "tag is-primary" $ text "!!!"
+            elClass "div" "tag is-primary" $ text "World"
+            elClass "div" "tag is-primary" $ text "Hello"
+            elClass "div" "tag is-primary" $ text "Bulma CSS"
+            elClass "div" "tag is-primary" $ text "Reflex-DOM"
+            elClass "div" "tag is-primary" $ text "!!!"
+            elClass "div" "tag is-primary" $ text "World"
+            elClass "div" "tag is-primary" $ text "Hello"
+            elClass "div" "tag is-primary" $ text "Bulma CSS"
+            elClass "div" "tag is-primary" $ text "Reflex-DOM"
+            elClass "div" "tag is-primary" $ text "!!!"
+            elClass "div" "tag is-primary" $ text "World"
+            elClass "div" "tag is-primary" $ text "Hello"
+            elClass "div" "tag is-primary" $ text "Bulma CSS"
+            elClass "div" "tag is-primary" $ text "Reflex-DOM"
       elClass "div" "hero-foot" $ do
         elClass "div" "container" $ do
-          elClass "div" "columns" $ do
-            elClass "div" "column" $ do
-              elAttr "input" (Map.fromList [("type", "text"), ("class", "input")]) $ blank
-            elClass "div" "column" $ do
-              elClass "button" "button is-rounded" $ do
-                elClass "span" "icon is-small" $ do
-                  elClass "i" "fas fa-search" $ blank
-              elClass "button" "button is-rounded" $ do
-                elClass "span" "icon is-small" $ do
-                  elClass "i" "fas fa-backspace" $ blank
-              elClass "button" "button is-rounded" $ do
-                elClass "span" "icon is-small" $ do
-                  elClass "i" "fas fa-undo" $ blank
-              elClass "button" "button is-rounded" $ do
-                elClass "span" "icon is-small" $ do
-                  elClass "i" "fas fa-redo" $ blank
+          elAttr "input" (Map.fromList [("type", "text"), ("class", "input")]) $ blank
+          elClass "button" "button is-rounded" $ do
+            elClass "span" "icon is-small" $ do
+              elClass "i" "fas fa-search" $ blank
+          elClass "button" "button is-rounded" $ do
+            elClass "span" "icon is-small" $ do
+              elClass "i" "fas fa-backspace" $ blank
+          elClass "button" "button is-rounded" $ do
+            elClass "span" "icon is-small" $ do
+              elClass "i" "fas fa-undo" $ blank
+          elClass "button" "button is-rounded" $ do
+            elClass "span" "icon is-small" $ do
+              elClass "i" "fas fa-redo" $ blank
     return ()
   }
