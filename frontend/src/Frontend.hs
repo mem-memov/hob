@@ -34,22 +34,22 @@ frontend = Frontend
       elClass "div" "hero-body" $ do
         elAttr "div" (Map.fromList [("style", "display: flex; flex-grow: 1; flex-shrink: 1; align-self: stretch; position: relative")]) $ do
           -- elAttr "div" (Map.fromList [("style", "position: absolute; width: 100%; height: 100%; display: flex; flex-direction: column; overflow-y: auto;")]) $ do
-          elAttr "div" (Map.fromList [("style", "position: absolute; width: 100%; height: 100%; display: flex; flex-direction: column; flex-wrap: wrap; align-items: flex-start; justify-content: flex-end;")]) $ do
-            elClass "span" "tag is-primary" $ text "!!!"
-            elClass "div" "tag is-primary" $ text "World"
-            elClass "div" "tag is-primary" $ text "Hello"
-            elClass "div" "tag is-primary" $ text "Bulma CSS"
-            elClass "div" "tag is-primary" $ text "Reflex-DOM"
-            elClass "div" "tag is-primary" $ text "!!!"
-            elClass "div" "tag is-primary" $ text "World"
-            elClass "div" "tag is-primary" $ text "Hello"
-            elClass "div" "tag is-primary" $ text "Bulma CSS"
-            elClass "div" "tag is-primary" $ text "Reflex-DOM"
-            elClass "div" "tag is-primary" $ text "!!!"
-            elClass "div" "tag is-primary" $ text "World"
-            elClass "div" "tag is-primary" $ text "Hello"
-            elClass "div" "tag is-primary" $ text "Bulma CSS"
-            elClass "div" "tag is-primary" $ text "Reflex-DOM"
+          elAttr "div" (Map.fromList [("style", "position: absolute; width: 100%; height: 100%; display: flex; flex-direction: column; flex-wrap: wrap-reverse; align-items: flex-end; justify-content: flex-end;")]) $ do
+            elClass "span" "tag is-primary" $ text "1"
+            elClass "div" "tag is-primary" $ text "2"
+            elClass "div" "tag is-primary" $ text "3"
+            elClass "div" "tag is-primary" $ text "4"
+            elClass "div" "tag is-primary" $ text "5"
+            elClass "div" "tag is-primary" $ text "6"
+            elClass "div" "tag is-primary" $ text "7"
+            elClass "div" "tag is-primary" $ text "8"
+            elClass "div" "tag is-primary" $ text "9"
+            elClass "div" "tag is-primary" $ text "10"
+            elClass "div" "tag is-primary" $ text "11"
+            elClass "div" "tag is-primary" $ text "12"
+            elClass "div" "tag is-primary" $ text "13"
+            elClass "div" "tag is-primary" $ text "14"
+            elClass "div" "tag is-primary" $ text "15"
       elClass "div" "hero-foot" $ do
         elClass "div" "container" $ do
           elAttr "input" (Map.fromList [("type", "text"), ("class", "input")]) $ blank
