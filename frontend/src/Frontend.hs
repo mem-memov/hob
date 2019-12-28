@@ -66,6 +66,9 @@ messageListElement = do
 toolbarElement :: MonadWidget t m => m ()
 toolbarElement = do
   elClass "div" "container" $ do
+    let attrs = constDyn $ Map.fromList [("type", "text"), ("class", "input")]
+    message <- textInput $ def & textInputConfig_attributes .~ attrs
+                    & textInputConfig_initialValue .~ "example"
     elAttr "input" (Map.fromList [("type", "text"), ("class", "input")]) $ blank
     elClass "button" "button is-rounded" $ do
       elClass "span" "icon is-small" $ do
