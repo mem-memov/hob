@@ -44,3 +44,20 @@ inputWidget = do
         <> ("class" =: "input")
     -- inputElement with content reset on send
   return $ tag (current $ _inputElement_value input) send
+
+-- todoItem :: MonadWidget t m 
+--   => Dynamic t Text 
+--   -> m (Event t ())
+-- todoItem dText =
+--   el "div" $ do
+--     el "div" $ 
+--       dynText dText
+--     button "Remove"
+
+-- example :: MonadWidget t m
+--   => Dynamic t Text
+--   -> m ()
+-- example dText = el "div" $ mdo
+--   eRemove <- todoItem $ dText <> dLabel
+--   dLabel <- holdDyn "" $ " (Removed)" <$ eRemove
+--   pure ()
