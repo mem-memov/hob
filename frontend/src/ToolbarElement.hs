@@ -2,28 +2,21 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TypeApplications #-}
 {-# LANGUAGE RecursiveDo #-}
+{-# LANGUAGE OverloadedLists #-}
+{-# LANGUAGE ScopedTypeVariables #-}
 module ToolbarElement(toolbarElement) where
 
-import qualified Data.Text as T
-import qualified Data.Text.Encoding as T
-import Obelisk.Frontend
-import Obelisk.Configs
-import Obelisk.Route
-import Reflex.Dom.Core
 
-import Common.Api
-import Common.Route
-import Obelisk.Generated.Static
-
-import qualified Data.Map as Map
-import           Data.Monoid ((<>))
+import           Control.Lens
+import qualified Data.Map     as M
+import qualified Data.Text    as T
+import           Reflex.Dom
+import Control.Monad.Fix (MonadFix)
 
 toolbarElement :: MonadWidget t m => m ()
 toolbarElement = do
   elClass "div" "container" $ do
-    let attrs = constDyn $ Map.fromList [("type", "text"), ("class", "input")]
-    message <- textInput $ def & textInputConfig_attributes .~ attrs
-                    & textInputConfig_initialValue .~ "example"
+    sendMessageEvent <- inputWidget
     elClass "button" "button is-rounded" $ do
       elClass "span" "icon is-small" $ do
         elClass "i" "fas fa-search" $ blank
@@ -37,3 +30,17 @@ toolbarElement = do
       elClass "span" "icon is-small" $ do
         elClass "i" "fas fa-redo" $ blank
   return ()
+
+inputWidget :: (DomBuilder t m, MonadFix m) => m (Event t T.Text)
+inputWidget = do
+  rec
+    let send = keypress Enter input
+        -- send signal firing on *return* key press
+    input <- inputElement $ def
+      & inputElementConfig_setValue .~ fmap (const "") send
+      & inputElementConfig_elementConfig . elementConfig_initialAttributes .~
+        ("placeholder" =: "Write task and press enter") 
+        <> ("type" =: "text") 
+        <> ("class" =: "input")
+    -- inputElement with content reset on send
+  return $ tag (current $ _inputElement_value input) send
