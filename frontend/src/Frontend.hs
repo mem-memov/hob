@@ -40,15 +40,17 @@ headElement = do
 bodyElement :: MonadWidget t m => m ()
 bodyElement = do
   elClass "section" "hero is-fullheight" $ do
-    elClass "div" "hero-head" $ blank
-    elClass "div" "hero-body" $ do
-      elAttr "div" (Map.fromList [("style", "display: flex; flex-grow: 1; flex-shrink: 1; align-self: stretch; position: relative")]) $ do
-        elAttr "div" (Map.fromList [("style", "position: absolute; width: 100%; height: 100%;")]) $ do
-          MessageListElement.messageListElement
-    elClass "div" "hero-foot" $ do
-      toolbarElementOutput <- ToolbarElement.widget
-      return ()
+    rec
+      elClass "div" "hero-head" $ blank
+      elClass "div" "hero-body" $ do
+        freezedPanel $ MessageListElement.widget
+      elClass "div" "hero-foot" $ do
+        toolbarElementOutput <- ToolbarElement.widget
+        return ()
+    return ()
 
-
-
-
+freezedPanel :: DomBuilder t m => m a -> m a
+freezedPanel content = do
+  elAttr "div" (Map.fromList [("style", "display: flex; flex-grow: 1; flex-shrink: 1; align-self: stretch; position: relative")]) $ do
+    elAttr "div" (Map.fromList [("style", "position: absolute; width: 100%; height: 100%;")]) $ do
+      content
