@@ -43,13 +43,15 @@ bodyElement = do
     rec
       elClass "div" "hero-head" $ blank
       elClass "div" "hero-body" $ do
-        freezedPanel $ MessageList.widget MessageList.Input {
-          MessageList.inputMessageEvent = Toolbar.outputMessageEvent toolbarOutput
-        }
-      toolbarOutput <- elClass "div" "hero-foot" $ do
-        toolbarOutput <- Toolbar.widget
-        return toolbarOutput
+        freezedPanel $ MessageList.widget input
+      input <- elClass "div" "hero-foot" $ do
+        output <- Toolbar.widget
+        return $ makeMessageListInput output
     return ()
+
+makeMessageListInput toolbarOutput = MessageList.Input {
+  MessageList.inputMessageEvent = Toolbar.outputMessageEvent toolbarOutput
+}
 
 freezedPanel :: DomBuilder t m => m a -> m a
 freezedPanel content = do
