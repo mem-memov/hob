@@ -25,6 +25,7 @@ data Input t = Input {
 widget :: MonadWidget t m => Input t -> m ()
 widget input = do
   elAttr "div" (Map.fromList [("style", "width: 100%; height: 100%; overflow-y: auto;")]) $ do
+    -- widgetHold (text "Loading...") (displaySomeData <$> (inputMessageEvent input))
     elClass "div" "" $ text "1"
     elClass "div" "" $ text "2"
     elClass "div" "" $ text "3"
@@ -40,3 +41,7 @@ widget input = do
     elClass "div" "" $ text "13"
     elClass "div" "" $ text "14"
     elClass "div" "" $ text "15"
+
+-- displaySomeData :: MonadWidget t m => T.Text -> m ()
+-- displaySomeData passedText = do 
+--   elClass "div" "" $ text passedText
