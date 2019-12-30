@@ -4,7 +4,7 @@
 {-# LANGUAGE RecursiveDo #-}
 {-# LANGUAGE OverloadedLists #-}
 {-# LANGUAGE ScopedTypeVariables #-}
-module ToolbarElement(toolbarElement) where
+module ToolbarElement (widget, Output(..)) where
 
 
 import           Control.Lens
@@ -13,11 +13,15 @@ import qualified Data.Text    as T
 import           Reflex.Dom
 import Control.Monad.Fix (MonadFix)
 
-import Widget.Display
-import Widget.Input
+import qualified Widget.Display
+import qualified Widget.Input
 
-toolbarElement :: MonadWidget t m => m ()
-toolbarElement = do
+data Output t = Output {
+  toolbarElementSendMessageEvent :: Event t T.Text
+}
+
+widget :: MonadWidget t m => m (Output t)
+widget = do
   elClass "div" "container" $ do
     sendMessageEvent <- Widget.Input.widget
     Widget.Display.widget sendMessageEvent
@@ -33,5 +37,8 @@ toolbarElement = do
     elClass "button" "button is-rounded" $ do
       elClass "span" "icon is-small" $ do
         elClass "i" "fas fa-redo" $ blank
-  return ()
+    return $
+      Output {
+        toolbarElementSendMessageEvent = sendMessageEvent
+      }
 
