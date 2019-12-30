@@ -18,8 +18,8 @@ import Obelisk.Generated.Static
 import qualified Data.Map as Map
 import           Data.Monoid ((<>))
 
-import ToolbarElement
-import MessageListElement
+import Toolbar
+import MessageList
 
 
 frontend :: Frontend (R FrontendRoute)
@@ -43,10 +43,12 @@ bodyElement = do
     rec
       elClass "div" "hero-head" $ blank
       elClass "div" "hero-body" $ do
-        freezedPanel $ MessageListElement.widget
-      elClass "div" "hero-foot" $ do
-        toolbarElementOutput <- ToolbarElement.widget
-        return ()
+        freezedPanel $ MessageList.widget MessageList.Input {
+          MessageList.inputMessageEvent = Toolbar.outputMessageEvent toolbarOutput
+        }
+      toolbarOutput <- elClass "div" "hero-foot" $ do
+        toolbarOutput <- Toolbar.widget
+        return toolbarOutput
     return ()
 
 freezedPanel :: DomBuilder t m => m a -> m a

@@ -2,7 +2,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TypeApplications #-}
 {-# LANGUAGE RecursiveDo #-}
-module MessageListElement(widget) where
+module MessageList (widget, Input(..)) where
 
 import qualified Data.Text as T
 import qualified Data.Text.Encoding as T
@@ -18,8 +18,12 @@ import Obelisk.Generated.Static
 import qualified Data.Map as Map
 import           Data.Monoid ((<>))
 
-widget :: MonadWidget t m => m ()
-widget = do
+data Input t = Input {
+  inputMessageEvent :: Event t T.Text
+}
+
+widget :: MonadWidget t m => Input t -> m ()
+widget input = do
   elAttr "div" (Map.fromList [("style", "width: 100%; height: 100%; overflow-y: auto;")]) $ do
     elClass "div" "" $ text "1"
     elClass "div" "" $ text "2"

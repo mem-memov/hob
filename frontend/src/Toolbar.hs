@@ -4,7 +4,7 @@
 {-# LANGUAGE RecursiveDo #-}
 {-# LANGUAGE OverloadedLists #-}
 {-# LANGUAGE ScopedTypeVariables #-}
-module ToolbarElement (widget, Output(..)) where
+module Toolbar (widget, Output(..)) where
 
 
 import           Control.Lens
@@ -17,7 +17,7 @@ import qualified Widget.Display
 import qualified Widget.Input
 
 data Output t = Output {
-  toolbarElementSendMessageEvent :: Event t T.Text
+  outputMessageEvent :: Event t T.Text
 }
 
 widget :: MonadWidget t m => m (Output t)
@@ -39,6 +39,6 @@ widget = do
         elClass "i" "fas fa-redo" $ blank
     return $
       Output {
-        toolbarElementSendMessageEvent = sendMessageEvent
+        outputMessageEvent = sendMessageEvent
       }
 
