@@ -17,6 +17,7 @@ toolbarElement :: MonadWidget t m => m ()
 toolbarElement = do
   elClass "div" "container" $ do
     sendMessageEvent <- inputWidget
+    displayWidget sendMessageEvent
     elClass "button" "button is-rounded" $ do
       elClass "span" "icon is-small" $ do
         elClass "i" "fas fa-search" $ blank
@@ -35,15 +36,19 @@ inputWidget :: (DomBuilder t m, MonadFix m) => m (Event t T.Text)
 inputWidget = do
   rec
     let send = keypress Enter input
-        -- send signal firing on *return* key press
     input <- inputElement $ def
       & inputElementConfig_setValue .~ fmap (const "") send
       & inputElementConfig_elementConfig . elementConfig_initialAttributes .~
         ("placeholder" =: "Write task and press enter") 
         <> ("type" =: "text") 
         <> ("class" =: "input")
-    -- inputElement with content reset on send
   return $ tag (current $ _inputElement_value input) send
+
+
+displayWidget textEvent = do
+  textDynamic <- holdDyn "" textEvent 
+  elClass "div" "box" $ dynText textDynamic
+
 
 -- todoItem :: MonadWidget t m 
 --   => Dynamic t Text 
