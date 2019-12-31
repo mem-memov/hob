@@ -18,8 +18,8 @@ import Obelisk.Generated.Static
 import qualified Data.Map as Map
 import           Data.Monoid ((<>))
 
-import Toolbar
-import MessageList
+import qualified Toolbar
+import qualified MessageList
 
 
 frontend :: Frontend (R FrontendRoute)
@@ -30,7 +30,7 @@ frontend = Frontend
 
 headElement :: MonadWidget t m => m ()
 headElement = do
-  el "title" $ text "Obelisk Minimal Example"
+  el "title" $ text "Chat"
   elAttr "meta" ("charset" =: "utf-8") blank
   elAttr "meta" (Map.fromList [("name", "viewport"), ("content", "width=device-width, initial-scale=1")]) blank
   elAttr "link" (("rel" =: "stylesheet") <> ("href" =: "https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css")) blank
@@ -46,12 +46,14 @@ bodyElement = do
         freezedPanel $ MessageList.widget input
       input <- elClass "div" "hero-foot" $ do
         output <- Toolbar.widget
-        return $ makeMessageListInput output
+        return $ makeInput output
     return ()
 
-makeMessageListInput toolbarOutput = MessageList.Input {
-  MessageList.inputMessageEvent = Toolbar.outputMessageEvent toolbarOutput
-}
+makeInput :: Toolbar.Output t -> MessageList.Input t
+makeInput toolbarOutput = 
+  MessageList.Input {
+    MessageList.inputMessageEvent = Toolbar.outputMessageEvent toolbarOutput
+  }
 
 freezedPanel :: DomBuilder t m => m a -> m a
 freezedPanel content = do

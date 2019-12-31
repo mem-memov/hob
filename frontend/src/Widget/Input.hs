@@ -20,7 +20,7 @@ widget = do
     input <- inputElement $ def
       & inputElementConfig_setValue .~ fmap (const "") send
       & inputElementConfig_elementConfig . elementConfig_initialAttributes .~
-        ("placeholder" =: "Write task and press enter") 
+        ("placeholder" =: "Write message and press enter") 
         <> ("type" =: "text") 
         <> ("class" =: "input")
   return $ tag (current $ _inputElement_value input) send
