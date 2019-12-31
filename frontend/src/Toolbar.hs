@@ -17,7 +17,7 @@ import qualified Widget.Display
 import qualified Widget.Input
 
 data Output t = Output {
-  outputMessageEvent :: Event t T.Text
+  outputMessage :: Event t T.Text
 }
 
 widget :: MonadWidget t m => m (Output t)
@@ -38,6 +38,6 @@ widget = do
         elClass "i" "fas fa-redo" $ blank
     return $
       Output {
-        outputMessageEvent = sendMessageEvent
+        outputMessage = sendMessageEvent
       }
 

@@ -46,14 +46,15 @@ bodyElement = do
         freezedPanel $ MessageList.widget input
       input <- elClass "div" "hero-foot" $ do
         output <- Toolbar.widget
-        return $ makeInput output
+        messages <- accumDyn collectMessages [] (Toolbar.outputMessage output)
+        return 
+          MessageList.Input {
+            MessageList.inputMessages = messages
+          }
     return ()
 
-makeInput :: Toolbar.Output t -> MessageList.Input t
-makeInput toolbarOutput = 
-  MessageList.Input {
-    MessageList.inputMessageEvent = Toolbar.outputMessageEvent toolbarOutput
-  }
+collectMessages :: [T.Text] -> T.Text -> [T.Text]
+collectMessages messages newMessage = newMessage : messages
 
 freezedPanel :: DomBuilder t m => m a -> m a
 freezedPanel content = do
