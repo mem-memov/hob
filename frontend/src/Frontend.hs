@@ -5,15 +5,11 @@
 module Frontend where
 
 import qualified Data.Text as T
-import qualified Data.Text.Encoding as T
 import Obelisk.Frontend
-import Obelisk.Configs
 import Obelisk.Route
 import Reflex.Dom.Core
 
-import Common.Api
 import Common.Route
-import Obelisk.Generated.Static
 
 import qualified Data.Map as Map
 import           Data.Monoid ((<>))

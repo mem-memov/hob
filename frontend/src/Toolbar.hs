@@ -6,14 +6,9 @@
 {-# LANGUAGE ScopedTypeVariables #-}
 module Toolbar (widget, Output(..)) where
 
-
-import           Control.Lens
-import qualified Data.Map     as M
 import qualified Data.Text    as T
 import           Reflex.Dom
-import Control.Monad.Fix (MonadFix)
 
-import qualified Widget.Display
 import qualified Widget.Input
 
 data Output t = Output {

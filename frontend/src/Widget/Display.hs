@@ -8,7 +8,6 @@ module Widget.Display (widget) where
 
 import qualified Data.Text    as T
 import           Reflex.Dom
-import Control.Monad.Fix (MonadFix)
 
 widget :: (DomBuilder t m, PostBuild t m, MonadHold t m) 
     => Event t T.Text

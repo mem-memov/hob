@@ -8,7 +8,6 @@ module Widget.Input (widget) where
 
 
 import           Control.Lens
-import qualified Data.Map     as M
 import qualified Data.Text    as T
 import           Reflex.Dom
 import Control.Monad.Fix (MonadFix)
