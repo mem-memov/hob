@@ -9,6 +9,8 @@ import Reflex.Dom.Core
 
 import qualified Data.Map as Map
 
+import qualified Message
+
 data Input t = Input {
   inputMessages :: Dynamic t [T.Text]
 }
@@ -16,14 +18,11 @@ data Input t = Input {
 widget :: MonadWidget t m => Input t -> m ()
 widget input = do
   elAttr "div" (Map.fromList [("style", "width: 100%; height: 100%; overflow-y: auto;")]) $ do
-    _ <- simpleList (filterMessages input) displaySomeData
+    messageOutputs <- simpleList (inputMessages input) displaySomeData
     return ()
 
-displaySomeData :: MonadWidget t m => Dynamic t T.Text -> m ()
+displaySomeData :: MonadWidget t m => Dynamic t T.Text -> m (Message.Output t)
 displaySomeData dynamicMessage = do
-  elClass "div" "" $ do
-    elClass "span" "tag is-primary" $ dynText $ dynamicMessage
-  return ()
+  output <- Message.widget (Message.Input dynamicMessage)
+  return (output)
 
-filterMessages :: Input t -> Dynamic t [T.Text]
-filterMessages input = inputMessages input
